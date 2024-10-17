@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
     int count_chars = 0, count_lines = 0, count_words = 0; // bool 
     int count_char = 0, count_line = 0, count_word = 0; // actual count
     int in_word = 0;
+    int no_flag_provided = 0;
 
     // Check for command line argument
     int start_index = 1; // file arguments start here
@@ -39,7 +40,7 @@ int main(int argc, char *argv[]) {
     else { // User specified the file to open
         file = fopen(argv[start_index], "r"); // Open file in read mode
         if(!file) {
-            perror("Error opening file!!");
+            perror("Error opening file!!! ");
             return EXIT_FAILURE;
         }
         printf("Reading from file: %s\n", argv[start_index]);
@@ -76,6 +77,24 @@ int main(int argc, char *argv[]) {
     }
     if(count_words) {
         printf("Words: %d\n", count_word);
+    }
+
+    // If no flags were provided, default to counting all
+    if(count_chars == 0 && count_lines == 0 && count_words == 0) {
+        count_chars = 1;
+        count_lines = 1;
+        count_words = 1;
+        no_flag_provided = 1;
+    }
+
+    // Output results in the required format
+    if(no_flag_provided) {
+        if (start_index < argc) {
+            printf("Char\tWord\tLine\tFile\n");
+            printf("%d\t%d\t%d\t%s\n", count_char, count_word, count_line, argv[start_index]);
+        } else {
+            printf("%d %d %d (stdin)\n", count_char, count_word, count_line);
+        }
     }
 
     // Close the file if it's not stdin
