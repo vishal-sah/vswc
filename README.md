@@ -25,7 +25,25 @@ The goal of this project is to replicate the essential functionalities of `wc`, 
 
 ## How to Use
 
-To be updated after completion of the project.
+### Compiling (for C implementation)
+
+To compile the program, use the following command:
+
+```bash
+gcc -o vswc vswc.c
+./vswc [OPTION]... [FILE]...
+./vswc test.txt
+./vswc -l test.txt
+echo "Hello World" | ./vswc
+./vswc test.txt
+cat test.txt | ./vswc
+```
+
+#### Options
+1. -c: Count only characters.
+2. -l: Count only lines.
+3. -w: Count only words.
+
 
 ### Contributing
 
